@@ -1,0 +1,15 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "ConnectionStrings": {
+    "Default": "Server=localhost;Port=3306;Database=Ubuntu_dev;User=webcam_user;Password=CHANGE_ME_dev_password_local_only;TreatTinyAsBoolean=true;"
+  },
+  "Jwt": {
+    "Secret": "CHANGE_ME_random_string_of_at_least_32_characters_dev_only",
+    "ExpiryMinutes": 1440
+  }
+}

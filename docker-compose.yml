@@ -1,0 +1,44 @@
+version: "3.9"
+
+# Levanta MySQL + la API con un solo comando: docker compose up --build
+# Pensado para desarrollo/pruebas locales. Para produccion, usar variables de entorno
+# reales (no las contraseñas de este archivo) y considerar un MySQL administrado.
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: webcam-studio-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: webcam_studio
+      MYSQL_USER: webcam_user
+      MYSQL_PASSWORD: webcam_password
+      MYSQL_ROOT_PASSWORD: root_password_change_me
+    ports:
+      - "3306:3306"
+    volumes:
+      - webcam_studio_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot_password_change_me"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: src/WebcamStudio.Api/Dockerfile
+    container_name: webcam-studio-api
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__Default: "Server=mysql;Port=3306;Database=webcam_studio;User=webcam_user;Password=webcam_password;TreatTinyAsBoolean=true;"
+      Jwt__Secret: "CHANGE_ME_use_a_random_string_of_at_least_32_characters"
+    ports:
+      - "8080:8080"
+
+volumes:
+  webcam_studio_mysql_data:

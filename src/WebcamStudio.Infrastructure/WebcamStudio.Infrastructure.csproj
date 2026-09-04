@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\WebcamStudio.Domain\WebcamStudio.Domain.csproj" />
+    <ProjectReference Include="..\WebcamStudio.Application\WebcamStudio.Application.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Da acceso a tipos de ASP.NET Core (Microsoft.AspNetCore.Identity.PasswordHasher,
+         IHttpContextAccessor) sin depender de un paquete NuGet de terceros: se resuelven
+         contra el shared framework de ASP.NET Core ya instalado en la maquina donde se
+         compile. Los tipos de Microsoft.IdentityModel.*/System.IdentityModel.Tokens.Jwt
+         usados para firmar el JWT (JwtTokenGenerator.cs) NO quedan expuestos por este
+         FrameworkReference al compilador, aunque esten presentes en tiempo de ejecucion;
+         por eso necesitan su propio PackageReference explicito abajo. -->
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.1" />
+  </ItemGroup>
+
+</Project>

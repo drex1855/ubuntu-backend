@@ -1,0 +1,27 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+
+## IDE
+.vs/
+.vscode/
+*.swp
+
+## Logs
+*.log
+
+## Secrets locales (nunca commitear appsettings con secretos reales)
+appsettings.Local.json
+appsettings.*.local.json
+appsettings.Development.json
+appsettings.Production.json
+*.env
+.env
+
+## Docker
+docker-compose.override.yml
+
+## Uploads reales (contenido de usuarios, no forma parte del codigo)
+src/WebcamStudio.Api/App_Data/uploads/
