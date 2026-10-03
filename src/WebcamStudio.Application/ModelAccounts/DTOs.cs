@@ -32,6 +32,5 @@ public record ChangePasswordRequest(
     [Required, MaxLength(200)] string CurrentPassword,
     [Required, MinLength(8), MaxLength(200)] string NewPassword);
 
-/// <summary>Restablece la contraseña de cualquier cuenta -- solo Admin, sin pedir la
-/// contraseña actual (ver ModelAccountsController.ResetPassword).</summary>
+
 public record ResetPasswordRequest([Required, MinLength(8), MaxLength(200)] string NewPassword);

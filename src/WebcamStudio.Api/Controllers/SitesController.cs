@@ -6,7 +6,7 @@ using WebcamStudio.Domain.Enums;
 
 namespace WebcamStudio.Api.Controllers;
 
-/// <summary>Catalogo de sitios/plataformas, usado por el modulo de Reporte de tokens (E2).</summary>
+
 [Authorize]
 public class SitesController : ApiControllerBase
 {

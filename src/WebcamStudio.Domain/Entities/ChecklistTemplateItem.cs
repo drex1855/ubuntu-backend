@@ -2,11 +2,6 @@ using WebcamStudio.Domain.Common;
 
 namespace WebcamStudio.Domain.Entities;
 
-/// <summary>
-/// Elemento fijo que debe revisarse en una habitacion (ej. "Camara", "Iluminacion",
-/// "Sabanas"). Es la plantilla que se "carga" en el nodo "Cargar checklist" (F2)
-/// del diagrama, antes de registrar el resultado de cada revision.
-/// </summary>
 public class ChecklistTemplateItem : AuditableEntity
 {
     public Guid RoomId { get; set; }

@@ -1,8 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace WebcamStudio.Application.Contacts;
-
-/// <summary>Payload del formulario publico de contacto en el sitio (sin autenticacion).</summary>
 public record CreatePublicContactRequest(
     [Required, MaxLength(200)] string FullName,
     [Required, Phone, MaxLength(30)] string PhoneNumber,
@@ -43,11 +41,4 @@ public record SendMassEmailRequest(
     List<Guid>? ContactIds,
     Guid? TagId);
 
-/// <summary>
-/// Resultado de un envio masivo. "Sent" refleja cuantos correos se INTENTARON enviar,
-/// no cuantos llegaron de verdad: IEmailSender.SendAsync (ver SmtpEmailSender) nunca
-/// lanza excepcion ni reporta exito/fallo al llamador, asi que no hay forma de saber
-/// desde aqui si un envio puntual fallo. No mostrar esto en la UI como "N enviados
-/// exitosamente" -- ver comentario en ContactService.SendMassEmailAsync.
-/// </summary>
 public record MassEmailResultDto(int Recipients, int Sent, int SkippedNoEmail);

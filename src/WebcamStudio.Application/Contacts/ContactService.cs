@@ -6,11 +6,7 @@ using WebcamStudio.Domain.Entities;
 
 namespace WebcamStudio.Application.Contacts;
 
-/// <summary>
-/// Modulo "Contactos": gente que escribio al WhatsApp del estudio (normalmente desde el
-/// formulario publico del sitio), con etiquetas libres y la posibilidad de mandarles
-/// correos masivos o exportar sus telefonos para marketing.
-/// </summary>
+
 public class ContactService : IContactService
 {
     private const int FullNameMaxLength = 150;
@@ -113,8 +109,6 @@ public class ContactService : IContactService
         if (contact is null)
             return Result.Failure("Contacto no encontrado.");
 
-        // El nombre/telefono se pierden al borrar; se guardan en el detalle de auditoria
-        // porque es lo unico que sobrevive despues de este punto.
         await _auditService.LogAsync("Contactos", "ContactoEliminado", nameof(Contact), contact.Id,
             new { contact.FullName, contact.PhoneNumber }, ct);
 
@@ -202,14 +196,7 @@ public class ContactService : IContactService
         return Result<ContactDto>.Success(ToDto(contact));
     }
 
-    /// <summary>
-    /// Envia un correo a los contactos seleccionados (por Id) y/o que tengan la etiqueta
-    /// indicada, que tengan correo registrado. IMPORTANTE: IEmailSender.SendAsync (ver
-    /// SmtpEmailSender) nunca lanza excepcion ni informa exito/fallo -- traga cualquier
-    /// error de SMTP y solo loguea. Por eso "Sent" aqui refleja cuantos correos se
-    /// INTENTARON, no cuantos llegaron de verdad. No mostrar esto como "N enviados
-    /// exitosamente" en la UI.
-    /// </summary>
+    
     public async Task<Result<MassEmailResultDto>> SendMassEmailAsync(SendMassEmailRequest request, CancellationToken ct = default)
     {
         if (string.IsNullOrWhiteSpace(request.Subject) || string.IsNullOrWhiteSpace(request.Body))

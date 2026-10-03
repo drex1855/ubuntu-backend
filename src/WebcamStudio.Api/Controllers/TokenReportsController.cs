@@ -21,8 +21,7 @@ public class TokenReportsController : ApiControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateTokenReportRequest request, CancellationToken ct)
     {
-        // Una Modelo solo puede registrar tokens a su propio nombre -- nunca a nombre de
-        // otra cuenta -- para que no pueda atribuir (ni robar) ingresos ajenos.
+       
         if (!User.IsInRole(nameof(AccountRole.Admin)) && !User.IsInRole(nameof(AccountRole.Monitor))
             && request.ModelAccountId != CurrentAccountId)
             return Forbid();
@@ -30,7 +29,7 @@ public class TokenReportsController : ApiControllerBase
         return HandleResult(await _service.CreateAsync(CurrentAccountId, request, ct));
     }
 
-    /// <summary>Reportes de todas las modelos: solo staff (ver GetMine para el self-service).</summary>
+   
     [Authorize(Roles = StaffRoles)]
     [HttpGet]
     public async Task<IActionResult> Search(

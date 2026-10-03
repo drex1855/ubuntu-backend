@@ -6,12 +6,7 @@ using WebcamStudio.Domain.Enums;
 
 namespace WebcamStudio.Application.Checklists;
 
-/// <summary>
-/// Implementa el modulo "Checklist de habitaciones" (F) del diagrama:
-/// F1 Seleccionar habitacion -> F2 Cargar checklist -> F3 Revisar estado ->
-/// F4 Elemento en buen estado? -> F5 Marcar bueno / F6-F7-F8 Marcar malo + observacion +
-/// solicitud de mantenimiento -> F9 Registrar materiales disponibles -> F10 Guardar checklist -> Z.
-/// </summary>
+
 public class ChecklistService : IChecklistService
 {
     private readonly IUnitOfWork _unitOfWork;

@@ -6,7 +6,7 @@ using WebcamStudio.Domain.Enums;
 
 namespace WebcamStudio.Api.Controllers;
 
-/// <summary>Modulo "Multas": el staff aplica y controla multas a cuentas de modelo.</summary>
+
 [Authorize]
 public class FinesController : ApiControllerBase
 {
@@ -37,7 +37,6 @@ public class FinesController : ApiControllerBase
     public async Task<IActionResult> SetStatus(Guid id, [FromBody] UpdateFineStatusRequest request, CancellationToken ct) =>
         HandleResult(await _service.SetStatusAsync(id, request, ct));
 
-    /// <summary>Multas propias, solo lectura -- cualquier cuenta autenticada consulta las suyas.</summary>
     [HttpGet("me")]
     public async Task<IActionResult> GetMyFines(CancellationToken ct)
     {

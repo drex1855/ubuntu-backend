@@ -12,11 +12,7 @@ using WebcamStudio.Application.TokenReports;
 
 namespace WebcamStudio.Application;
 
-/// <summary>
-/// Registra todos los servicios de caso de uso (uno por modulo). Cuando se agregue
-/// un modulo nuevo, el patron a seguir es siempre el mismo: DTOs.cs + I&lt;Modulo&gt;Service.cs +
-/// &lt;Modulo&gt;Service.cs dentro de su propia carpeta, y una linea aqui.
-/// </summary>
+
 public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)

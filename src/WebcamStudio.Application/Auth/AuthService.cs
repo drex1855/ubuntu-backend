@@ -5,10 +5,7 @@ using WebcamStudio.Domain.Enums;
 
 namespace WebcamStudio.Application.Auth;
 
-/// <summary>
-/// Implementa la parte de autenticacion de "Validar identidad y permisos" (C4) del
-/// diagrama, reutilizada como login general de la API (no solo para el flujo de WhatsApp).
-/// </summary>
+
 public class AuthService : IAuthService
 {
     private const int MaxFailedAttempts = 5;
@@ -36,7 +33,7 @@ public class AuthService : IAuthService
         var account = await _unitOfWork.ModelAccounts.GetByEmailAsync(request.Email, ct);
         if (account is null)
         {
-            // No revelamos si el correo existe o no, para no facilitar enumeracion de cuentas.
+            
             await _auditService.LogAsync("Auth", "LoginFallido", "ModelAccount", null,
                 new { request.Email }, ct);
             return Result<LoginResponse>.Failure("Credenciales invalidas.");
@@ -68,8 +65,7 @@ public class AuthService : IAuthService
 
         if (account.Status != AccountStatus.Activo)
         {
-            // Corresponde a la rama "Responder acceso no autorizado" (C5) del diagrama,
-            // generalizada: una cuenta desactivada no puede autenticarse en ningun modulo.
+           
             await _auditService.LogAsync("Auth", "LoginRechazadoCuentaDesactivada", "ModelAccount", account.Id, null, ct);
             return Result<LoginResponse>.Failure("La cuenta esta desactivada. Contacta a un administrador.");
         }

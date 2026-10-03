@@ -9,6 +9,5 @@ public interface IFineService
     Task<List<FineDto>> SearchAsync(Guid? modelAccountId, FineStatus? status, CancellationToken ct = default);
     Task<Result<FineDto>> SetStatusAsync(Guid id, UpdateFineStatusRequest request, CancellationToken ct = default);
 
-    /// <summary>Multas de la propia cuenta, solo lectura (ver ProfilePage).</summary>
     Task<List<FineDto>> GetMyFinesAsync(Guid modelAccountId, CancellationToken ct = default);
 }

@@ -7,7 +7,7 @@ using WebcamStudio.Domain.Enums;
 
 namespace WebcamStudio.Api.Controllers;
 
-/// <summary>Consulta del registro de auditoria transversal (nodo Z del diagrama). Solo Admin.</summary>
+
 [Authorize(Roles = nameof(AccountRole.Admin))]
 public class AuditController : ApiControllerBase
 {

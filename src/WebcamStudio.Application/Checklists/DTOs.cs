@@ -14,7 +14,7 @@ public record CreateChecklistTemplateItemRequest(
 
 public record ChecklistTemplateItemDto(Guid Id, string Name, string? Description, int DisplayOrder);
 
-/// <summary>Plantilla completa de una habitacion (F1 + F2 del diagrama).</summary>
+
 public record RoomChecklistTemplateDto(RoomDto Room, List<ChecklistTemplateItemDto> Items);
 
 public record SubmitChecklistItemResultRequest(

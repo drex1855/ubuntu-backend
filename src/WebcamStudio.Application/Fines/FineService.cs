@@ -6,11 +6,7 @@ using WebcamStudio.Domain.Enums;
 
 namespace WebcamStudio.Application.Fines;
 
-/// <summary>
-/// Modulo "Multas": el staff (Admin/Monitor) le aplica una multa a una cuenta de modelo
-/// y controla su estado (pendiente por cobrar / pagada / cancelada). La modelo afectada
-/// solo puede consultar las suyas, nunca modificarlas (ver GetMyFinesAsync).
-/// </summary>
+
 public class FineService : IFineService
 {
     private readonly IUnitOfWork _unitOfWork;

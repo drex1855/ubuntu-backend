@@ -3,11 +3,7 @@ using WebcamStudio.Domain.Enums;
 
 namespace WebcamStudio.Domain.Entities;
 
-/// <summary>
-/// Multa aplicada por el estudio a una cuenta de modelo. Solo el staff (Admin/Monitor)
-/// la crea y cambia su estado; la modelo afectada solo puede verla en su perfil
-/// (ver FinesController/GetMyFinesAsync).
-/// </summary>
+
 public class Fine : AuditableEntity
 {
     public Guid ModelAccountId { get; set; }
