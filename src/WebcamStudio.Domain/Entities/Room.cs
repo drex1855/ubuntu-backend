@@ -1,11 +1,7 @@
-using WebcamStudio.Domain.Common;
+﻿using WebcamStudio.Domain.Common;
 
 namespace WebcamStudio.Domain.Entities;
 
-/// <summary>
-/// Habitacion/estudio fisico que se revisa periodicamente. Modulo del diagrama:
-/// "Checklist de habitaciones" (F), nodo "Seleccionar habitacion" (F1).
-/// </summary>
 public class Room : AuditableEntity
 {
     public string Name { get; set; } = string.Empty;

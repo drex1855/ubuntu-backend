@@ -1,4 +1,4 @@
-namespace WebcamStudio.Domain.Common;
+﻿namespace WebcamStudio.Domain.Common;
 
 
 public abstract class BaseEntity

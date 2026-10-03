@@ -1,14 +1,9 @@
-using WebcamStudio.Application.Interfaces.Persistence;
+﻿using WebcamStudio.Application.Interfaces.Persistence;
 using WebcamStudio.Domain.Entities;
 using WebcamStudio.Infrastructure.Persistence.Repositories;
 
 namespace WebcamStudio.Infrastructure.Persistence;
 
-/// <summary>
-/// Implementacion de IUnitOfWork. Los repositorios se crean "perezosos" (solo la
-/// primera vez que se piden) para no instanciar los 14 repositorios en cada request
-/// si un endpoint solo necesita uno o dos.
-/// </summary>
 public class UnitOfWork : IUnitOfWork
 {
     private readonly AppDbContext _context;

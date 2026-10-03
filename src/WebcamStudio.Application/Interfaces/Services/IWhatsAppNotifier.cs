@@ -1,4 +1,4 @@
-namespace WebcamStudio.Application.Interfaces.Services;
+﻿namespace WebcamStudio.Application.Interfaces.Services;
 
 
 public interface IWhatsAppNotifier

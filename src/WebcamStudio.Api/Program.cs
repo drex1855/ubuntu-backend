@@ -1,4 +1,4 @@
-using System.Text;
+﻿using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -76,9 +76,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 
-// Limite de tasa para el formulario publico de contacto (ver ContactsController.SubmitPublic):
-// es el unico endpoint anonimo del sistema, alcanzable por cualquiera en internet una vez
-// desplegado, asi que se limita por IP para frenar abuso/spam sin necesitar CAPTCHA todavia.
 builder.Services.AddRateLimiter(options =>
 {
     options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
@@ -92,8 +89,6 @@ builder.Services.AddRateLimiter(options =>
                 QueueLimit = 0
             }));
 
-    // Login tambien es anonimo y alcanzable por cualquiera -- limite por IP como primera
-    // capa de defensa contra fuerza bruta/bots, ademas del bloqueo por cuenta en AuthService.
     options.AddPolicy("Auth", httpContext =>
         RateLimitPartition.GetFixedWindowLimiter(
             partitionKey: httpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown",
@@ -104,8 +99,6 @@ builder.Services.AddRateLimiter(options =>
                 QueueLimit = 0
             }));
 
-    // Cambio de contrasena ya requiere sesion, pero sin limite alguien con un token robado
-    // (o la propia cuenta) podria probar la contrasena actual por fuerza bruta sin freno.
     options.AddPolicy("SensitiveAccountAction", httpContext =>
         RateLimitPartition.GetFixedWindowLimiter(
             partitionKey: httpContext.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value
@@ -130,7 +123,6 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// ---- Pipeline ----
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
@@ -169,8 +161,6 @@ if (!app.Environment.IsDevelopment())
     app.UseHttpsRedirection();
 }
 
-// Cabeceras de seguridad basicas para toda respuesta. El CSP que protege al navegador de
-// XSS se define donde se sirva el HTML del frontend (fuera de esta API que solo habla JSON).
 app.Use(async (context, next) =>
 {
     context.Response.Headers["X-Content-Type-Options"] = "nosniff";

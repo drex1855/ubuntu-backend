@@ -1,4 +1,4 @@
-using System.Net.Mail;
+﻿using System.Net.Mail;
 using WebcamStudio.Application.Common;
 using WebcamStudio.Application.Interfaces.Persistence;
 using WebcamStudio.Application.Interfaces.Services;

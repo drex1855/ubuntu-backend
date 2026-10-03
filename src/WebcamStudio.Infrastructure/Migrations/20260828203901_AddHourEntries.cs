@@ -5,10 +5,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebcamStudio.Infrastructure.Migrations
 {
-    /// <inheritdoc />
     public partial class AddHourEntries : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -45,7 +43,6 @@ namespace WebcamStudio.Infrastructure.Migrations
                 column: "ModelAccountId");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

@@ -1,4 +1,4 @@
-using WebcamStudio.Domain.Entities;
+﻿using WebcamStudio.Domain.Entities;
 
 namespace WebcamStudio.Application.Interfaces.Persistence;
 

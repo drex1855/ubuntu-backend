@@ -1,4 +1,4 @@
-using WebcamStudio.Application.Common;
+﻿using WebcamStudio.Application.Common;
 using WebcamStudio.Application.Interfaces.Persistence;
 using WebcamStudio.Application.Interfaces.Services;
 using WebcamStudio.Domain.Entities;
@@ -57,9 +57,6 @@ public class LoanRequestService : ILoanRequestService
         await _auditService.LogAsync("Prestamos", "SolicitudCreada", nameof(LoanRequest), loanRequest.Id,
             new { request.Amount }, ct);
 
-        // IEmailSender/IWhatsAppNotifier nunca lanzan excepcion (ver SmtpEmailSender /
-        // WhatsAppCloudApiNotifier): si el envio falla o las credenciales todavia no
-        // estan configuradas, la solicitud ya quedo guardada igual.
         var subject = $"Nueva solicitud de prestamo - {account.FullName}";
         var body =
             $"Se registro una nueva solicitud de prestamo.\n\n" +
@@ -97,9 +94,6 @@ public class LoanRequestService : ILoanRequestService
         await _auditService.LogAsync("Prestamos", $"EstadoCambiadoA{request.Status}", nameof(LoanRequest),
             loanRequest.Id, null, ct);
 
-        // Notificar a quien pidio el prestamo el resultado de la decision -- mismo criterio
-        // de "mejor esfuerzo" que el aviso al dueno: si la cuenta no tiene telefono
-        // registrado, el WhatsApp simplemente se omite sin marcar error.
         if (account is not null)
         {
             var decisionText = request.Status == LoanRequestStatus.Aprobada ? "aprobada" : "rechazada";

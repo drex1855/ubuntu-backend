@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
 using WebcamStudio.Application.Common;
@@ -20,7 +20,6 @@ public class ContactsController : ApiControllerBase
 
     private const string StaffRoles = $"{nameof(AccountRole.Admin)},{nameof(AccountRole.Monitor)}";
 
-    /// <summary>Envio del formulario publico de contacto (sin sesion).</summary>
     [AllowAnonymous]
     [EnableRateLimiting("PublicContactForm")]
     [HttpPost("public")]
@@ -79,8 +78,6 @@ public class ContactsController : ApiControllerBase
     public async Task<IActionResult> RemoveTag(Guid id, Guid tagId, CancellationToken ct) =>
         HandleResult(await _service.RemoveTagAsync(id, tagId, ct));
 
-    /// <summary>Envia un correo a los contactos indicados y/o con la etiqueta indicada,
-    /// que tengan correo registrado.</summary>
     [Authorize(Roles = StaffRoles)]
     [HttpPost("mass-email")]
     public async Task<IActionResult> SendMassEmail([FromBody] SendMassEmailRequest request, CancellationToken ct) =>

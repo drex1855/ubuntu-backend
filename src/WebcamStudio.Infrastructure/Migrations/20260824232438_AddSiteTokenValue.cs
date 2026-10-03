@@ -4,10 +4,8 @@
 
 namespace WebcamStudio.Infrastructure.Migrations
 {
-    /// <inheritdoc />
     public partial class AddSiteTokenValue : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<decimal>(
@@ -18,7 +16,6 @@ namespace WebcamStudio.Infrastructure.Migrations
                 defaultValue: 0m);
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(

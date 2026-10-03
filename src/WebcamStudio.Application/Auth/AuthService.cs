@@ -1,4 +1,4 @@
-using WebcamStudio.Application.Common;
+﻿using WebcamStudio.Application.Common;
 using WebcamStudio.Application.Interfaces.Persistence;
 using WebcamStudio.Application.Interfaces.Services;
 using WebcamStudio.Domain.Enums;

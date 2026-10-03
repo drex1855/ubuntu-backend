@@ -1,26 +1,10 @@
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Hosting;
 using WebcamStudio.Application.Common;
 using WebcamStudio.Application.Interfaces.Services;
 
 namespace WebcamStudio.Infrastructure.Services;
 
-/// <summary>
-/// Guarda archivos en disco, fuera de wwwroot (nunca se sirven como archivos estaticos --
-/// solo a traves de un endpoint autenticado que llama a OpenReadAsync). Pensado para
-/// fotos del checklist de habitaciones; si mas adelante otro modulo necesita subir
-/// archivos, puede reusar esta misma implementacion sin cambios.
-///
-/// Medidas de seguridad:
-/// - Nunca confia en el Content-Type ni el nombre que manda el cliente: valida los
-///   primeros bytes del archivo (firma real de JPEG/PNG/WEBP) antes de aceptarlo.
-/// - Limite de tamano (5 MB) validado aqui, no solo en el input del navegador.
-/// - El archivo se guarda con un nombre aleatorio (GUID + extension), nunca con el
-///   nombre original -- evita colisiones y cualquier intento de path traversal al guardar.
-/// - Al leer, valida que el nombre pedido tenga exactamente el formato esperado
-///   (GUID + extension conocida) antes de combinar la ruta, para no confiar en nada que
-///   venga de la base de datos o de la URL sin revisar.
-/// </summary>
 public class LocalFileStorageService : IFileStorageService
 {
     private const long MaxBytes = 5 * 1024 * 1024;

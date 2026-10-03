@@ -5,10 +5,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebcamStudio.Infrastructure.Migrations
 {
-    /// <inheritdoc />
     public partial class AddStoreSalesAndDebt : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<decimal>(
@@ -136,7 +134,6 @@ namespace WebcamStudio.Infrastructure.Migrations
                 column: "ProductId");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

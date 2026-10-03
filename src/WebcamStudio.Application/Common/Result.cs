@@ -1,4 +1,4 @@
-namespace WebcamStudio.Application.Common;
+﻿namespace WebcamStudio.Application.Common;
 
 
 public class Result

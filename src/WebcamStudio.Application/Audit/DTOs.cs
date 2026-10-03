@@ -1,4 +1,4 @@
-namespace WebcamStudio.Application.Audit;
+﻿namespace WebcamStudio.Application.Audit;
 
 public record AuditLogDto(
     Guid Id,

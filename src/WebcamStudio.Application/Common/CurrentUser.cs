@@ -1,4 +1,4 @@
-using WebcamStudio.Domain.Enums;
+﻿using WebcamStudio.Domain.Enums;
 
 namespace WebcamStudio.Application.Common;
 

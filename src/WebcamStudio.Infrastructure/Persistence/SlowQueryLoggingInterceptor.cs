@@ -1,13 +1,8 @@
-using Microsoft.EntityFrameworkCore.Diagnostics;
+﻿using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Logging;
 
 namespace WebcamStudio.Infrastructure.Persistence;
 
-/// <summary>
-/// Registra en el log (nivel Warning) cualquier consulta a la base de datos que tarde
-/// mas del umbral definido. No reemplaza un APM real, pero da visibilidad basica de
-/// consultas lentas/costosas sin agregar una dependencia externa.
-/// </summary>
 public class SlowQueryLoggingInterceptor : DbCommandInterceptor
 {
     private static readonly TimeSpan SlowQueryThreshold = TimeSpan.FromSeconds(1);

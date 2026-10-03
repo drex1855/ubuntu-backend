@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using WebcamStudio.Application.Interfaces.Persistence;
 using WebcamStudio.Domain.Entities;
 

@@ -1,14 +1,9 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using WebcamStudio.Application.Interfaces.Persistence;
 using WebcamStudio.Domain.Common;
 
 namespace WebcamStudio.Infrastructure.Persistence.Repositories;
 
-/// <summary>
-/// Implementacion generica de IRepository&lt;T&gt; sobre EF Core. Los repositorios
-/// especificos de cada modulo heredan de esta clase para no reescribir el CRUD basico
-/// y solo agregan los metodos de consulta particulares que necesitan.
-/// </summary>
 public class Repository<T> : IRepository<T> where T : BaseEntity
 {
     protected readonly AppDbContext Context;

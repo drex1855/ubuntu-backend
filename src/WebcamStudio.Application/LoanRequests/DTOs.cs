@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using WebcamStudio.Domain.Enums;
 
 namespace WebcamStudio.Application.LoanRequests;

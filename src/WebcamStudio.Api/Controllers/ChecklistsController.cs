@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebcamStudio.Application.Checklists;
 using WebcamStudio.Application.Common;
@@ -23,8 +23,6 @@ public class ChecklistsController : ApiControllerBase
     private const long MaxUploadBytes = 5 * 1024 * 1024;
     private const string StaffRoles = $"{nameof(AccountRole.Admin)},{nameof(AccountRole.Monitor)}";
 
-    /// <summary>Sube una foto opcional (evidencia de un item o de las notas de materiales).
-    /// Devuelve el nombre guardado, que luego viaja en SubmitChecklistRequest.</summary>
     [RequestSizeLimit(MaxUploadBytes)]
     [HttpPost("attachments")]
     public async Task<IActionResult> UploadAttachment(IFormFile file, CancellationToken ct)
@@ -40,9 +38,6 @@ public class ChecklistsController : ApiControllerBase
         return Ok(ApiResponse<UploadAttachmentResponse>.Ok(new UploadAttachmentResponse(result.Value!.FileName)));
     }
 
-    /// <summary>Descarga una foto adjunta previamente subida. Requiere sesion -- las fotos
-    /// nunca se sirven como archivos estaticos. Son evidencia operativa de habitaciones,
-    /// no datos propios de una modelo, asi que se restringe a staff.</summary>
     [Authorize(Roles = StaffRoles)]
     [HttpGet("attachments/{fileName}")]
     public async Task<IActionResult> GetAttachment(string fileName, CancellationToken ct)
@@ -72,12 +67,10 @@ public class ChecklistsController : ApiControllerBase
         Guid roomId, [FromBody] CreateChecklistTemplateItemRequest request, CancellationToken ct) =>
         HandleResult(await _service.AddTemplateItemAsync(roomId, request, ct));
 
-    /// <summary>F1-F2: Seleccionar habitacion y cargar su checklist.</summary>
     [HttpGet("rooms/{roomId:guid}/template")]
     public async Task<IActionResult> GetTemplate(Guid roomId, CancellationToken ct) =>
         HandleResult(await _service.GetRoomTemplateAsync(roomId, ct));
 
-    /// <summary>F3-F10: Enviar los resultados de la revision (guarda checklist + mantenimiento).</summary>
     [HttpPost("submit")]
     public async Task<IActionResult> Submit([FromBody] SubmitChecklistRequest request, CancellationToken ct) =>
         HandleResult(await _service.SubmitChecklistAsync(CurrentAccountId, request, ct));

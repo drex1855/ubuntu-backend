@@ -1,4 +1,4 @@
-using WebcamStudio.Application.Common;
+﻿using WebcamStudio.Application.Common;
 using WebcamStudio.Application.Interfaces.Persistence;
 using WebcamStudio.Application.Interfaces.Services;
 using WebcamStudio.Domain.Entities;
@@ -104,14 +104,14 @@ public class ModelAccountService : IModelAccountService
     public async Task<Result> ChangePasswordAsync(Guid id, ChangePasswordRequest request, CancellationToken ct = default)
     {
         if (string.IsNullOrWhiteSpace(request.NewPassword) || request.NewPassword.Length < 8)
-            return Result.Failure("La nueva contraseña debe tener al menos 8 caracteres.");
+            return Result.Failure("La nueva contraseÃ±a debe tener al menos 8 caracteres.");
 
         var account = await _unitOfWork.ModelAccounts.GetByIdAsync(id, ct);
         if (account is null)
             return Result.Failure("Cuenta no encontrada.");
 
         if (!_passwordHasher.Verify(request.CurrentPassword, account.PasswordHash))
-            return Result.Failure("La contraseña actual no es correcta.");
+            return Result.Failure("La contraseÃ±a actual no es correcta.");
 
         account.PasswordHash = _passwordHasher.Hash(request.NewPassword);
         _unitOfWork.ModelAccounts.Update(account);

@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebcamStudio.Application.Common;
 using WebcamStudio.Application.Sites;
@@ -19,7 +19,6 @@ public class SitesController : ApiControllerBase
 
     private const string StaffRoles = $"{nameof(AccountRole.Admin)},{nameof(AccountRole.Monitor)}";
 
-    /// <summary>Consultar sitios (cualquier cuenta autenticada, para el selector del reporte).</summary>
     [HttpGet]
     public async Task<IActionResult> GetAll(CancellationToken ct)
     {
@@ -32,7 +31,6 @@ public class SitesController : ApiControllerBase
     public async Task<IActionResult> Create([FromBody] CreateSiteRequest request, CancellationToken ct) =>
         HandleResult(await _service.CreateAsync(request, ct));
 
-    /// <summary>Edita nombre, descripcion o el valor por token (USD) de un sitio existente.</summary>
     [Authorize(Roles = StaffRoles)]
     [HttpPut("{id:guid}")]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdateSiteRequest request, CancellationToken ct) =>

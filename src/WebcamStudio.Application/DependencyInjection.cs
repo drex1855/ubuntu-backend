@@ -1,4 +1,4 @@
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using WebcamStudio.Application.Auth;
 using WebcamStudio.Application.Checklists;
 using WebcamStudio.Application.Contacts;

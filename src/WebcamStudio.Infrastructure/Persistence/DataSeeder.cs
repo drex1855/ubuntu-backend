@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using WebcamStudio.Application.Interfaces.Services;
@@ -7,17 +7,6 @@ using WebcamStudio.Domain.Enums;
 
 namespace WebcamStudio.Infrastructure.Persistence;
 
-/// <summary>
-/// Resuelve un problema real de arranque: todos los endpoints para crear/gestionar
-/// cuentas (ModelAccountsController) exigen rol Admin, pero sin ninguna cuenta existente
-/// no hay forma de autenticarse para crear la primera. Este seeder crea un unico Admin
-/// inicial a partir de appsettings ("Seed:AdminEmail"/"Seed:AdminPassword") la primera
-/// vez que la tabla ModelAccounts esta vacia. Es idempotente: en cualquier arranque
-/// posterior, ya hay al menos una cuenta, asi que no hace nada.
-///
-/// Por seguridad, cambiar la contraseña del admin inicial (o desactivar el seeder con
-/// "Seed:Enabled": false) apenas se tenga otra cuenta Admin creada.
-/// </summary>
 public static class DataSeeder
 {
     public static async Task SeedAsync(
@@ -47,6 +36,6 @@ public static class DataSeeder
         await db.SaveChangesAsync();
 
         logger.LogWarning(
-            "Se creo la cuenta Admin inicial ({Email}). Cambia la contraseña por defecto cuanto antes.", email);
+            "Se creo la cuenta Admin inicial ({Email}). Cambia la contraseÃ±a por defecto cuanto antes.", email);
     }
 }

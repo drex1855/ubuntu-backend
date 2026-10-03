@@ -1,15 +1,10 @@
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using WebcamStudio.Application.Interfaces.Services;
 using WebcamStudio.Domain.Enums;
 
 namespace WebcamStudio.Infrastructure.Security;
 
-/// <summary>
-/// Lee los claims del JWT ya validado por el middleware de autenticacion de ASP.NET Core.
-/// Es la unica clase de todo el backend que sabe que existe HttpContext -- por eso vive
-/// en Infrastructure y no en Application, que debe poder probarse sin un servidor HTTP real.
-/// </summary>
 public class CurrentUserService : ICurrentUserService
 {
     private readonly IHttpContextAccessor _httpContextAccessor;

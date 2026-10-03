@@ -1,18 +1,10 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using WebcamStudio.Application.Interfaces.Services;
 using WebcamStudio.Domain.Common;
 using WebcamStudio.Domain.Entities;
 
 namespace WebcamStudio.Infrastructure.Persistence;
 
-/// <summary>
-/// DbContext principal. Todas las tablas del sistema (los 5 modulos + auditoria) viven
-/// en el mismo contexto por ahora, lo cual es correcto para un modular monolith: los
-/// modulos estan separados por carpeta/namespace en el codigo, pero comparten base de
-/// datos para poder hacer joins simples (ej. reportes de tokens por modelo) y una sola
-/// transaccion por request. Si el sistema crece tanto que un modulo necesita su propia
-/// base de datos o escalar aparte, se puede partir en otro DbContext mas adelante.
-/// </summary>
 public class AppDbContext : DbContext
 {
     private readonly ICurrentUserService? _currentUserService;
@@ -43,9 +35,6 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Aplica todas las clases IEntityTypeConfiguration<T> definidas en este ensamblado
-        // (carpeta Persistence/Configurations). Un modulo nuevo solo tiene que agregar su
-        // configuracion ahi y queda incluido automaticamente, sin tocar este archivo.
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
         base.OnModelCreating(modelBuilder);
     }
@@ -56,11 +45,6 @@ public class AppDbContext : DbContext
         return base.SaveChangesAsync(cancellationToken);
     }
 
-    /// <summary>
-    /// Llena CreatedAt/UpdatedAt/CreatedByAccountId/UpdatedByAccountId automaticamente
-    /// para cualquier entidad que herede de AuditableEntity, sin que cada servicio de
-    /// Application tenga que acordarse de setearlos a mano en cada Create/Update.
-    /// </summary>
     private void ApplyAuditInfo()
     {
         var now = DateTime.UtcNow;

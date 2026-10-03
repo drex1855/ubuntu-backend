@@ -1,4 +1,4 @@
-using WebcamStudio.Application.Common;
+﻿using WebcamStudio.Application.Common;
 using WebcamStudio.Application.Interfaces.Persistence;
 using WebcamStudio.Application.Interfaces.Services;
 using WebcamStudio.Domain.Entities;
@@ -60,7 +60,6 @@ public class ChecklistService : IChecklistService
 
     public async Task<Result<RoomChecklistTemplateDto>> GetRoomTemplateAsync(Guid roomId, CancellationToken ct = default)
     {
-        // F1 + F2: Seleccionar habitacion / Cargar checklist.
         var room = await _unitOfWork.Rooms.GetWithTemplateItemsAsync(roomId, ct);
         if (room is null)
             return Result<RoomChecklistTemplateDto>.Failure("Habitacion no encontrada.");
@@ -97,7 +96,6 @@ public class ChecklistService : IChecklistService
             RoomId = room.Id,
             PerformedByAccountId = performedByAccountId,
             PerformedAt = DateTime.UtcNow,
-            // F9: Registrar materiales disponibles.
             AvailableMaterialsNotes = request.AvailableMaterialsNotes,
             MaterialsAttachmentFileName = request.MaterialsAttachmentFileName,
             MaterialsAttachmentContentType = request.MaterialsAttachmentContentType
@@ -105,7 +103,6 @@ public class ChecklistService : IChecklistService
 
         foreach (var itemRequest in request.Items)
         {
-            // F3: Revisar estado de equipos y materiales.
             var result = new ChecklistItemResult
             {
                 ChecklistRun = run,
@@ -117,11 +114,8 @@ public class ChecklistService : IChecklistService
             };
             run.ItemResults.Add(result);
 
-            // F4: Elemento en buen estado?
             if (itemRequest.Status == ChecklistItemStatus.Malo)
             {
-                // F6 + F7: Marcar como malo + registrar observacion (ya esta en el result).
-                // F8: Crear solicitud de mantenimiento.
                 var templateItem = room.TemplateItems.First(i => i.Id == itemRequest.TemplateItemId);
                 run.MaintenanceRequests.Add(new MaintenanceRequest
                 {
@@ -133,14 +127,11 @@ public class ChecklistService : IChecklistService
                     Status = MaintenanceRequestStatus.Pendiente
                 });
             }
-            // F5: Marcar como bueno -> no requiere accion adicional, el Status ya lo refleja.
         }
 
-        // F10: Guardar checklist.
         await _unitOfWork.ChecklistRuns.AddAsync(run, ct);
         await _unitOfWork.SaveChangesAsync(ct);
 
-        // Z: Registrar auditoria.
         await _auditService.LogAsync("Checklist", "ChecklistGuardado", nameof(ChecklistRun), run.Id,
             new { room.Id, MaintenanceRequestsCreated = run.MaintenanceRequests.Count }, ct);
 

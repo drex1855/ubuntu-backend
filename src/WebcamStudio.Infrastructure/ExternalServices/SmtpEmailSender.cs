@@ -1,4 +1,4 @@
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -6,17 +6,6 @@ using WebcamStudio.Application.Interfaces.Services;
 
 namespace WebcamStudio.Infrastructure.ExternalServices;
 
-/// <summary>
-/// Envio real de correo por SMTP usando System.Net.Mail (parte del framework de .NET,
-/// sin paquete NuGet de terceros -- mismo criterio que PasswordHasher). El cuerpo se
-/// manda siempre en texto plano (IsBodyHtml = false) para no abrir superficie de
-/// inyeccion HTML con contenido escrito por el usuario (ej. el motivo del prestamo).
-///
-/// Nunca lanza excepcion hacia el llamador: un correo es una notificacion secundaria,
-/// si falla (SMTP mal configurado, timeout, etc.) solo se registra en el log y listo --
-/// la capa Application (que no conoce logging/SMTP a proposito) no tiene que lidiar
-/// con ese caso.
-/// </summary>
 public class SmtpEmailSender : IEmailSender
 {
     private readonly EmailSettings _settings;

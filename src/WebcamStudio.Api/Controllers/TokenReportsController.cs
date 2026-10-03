@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebcamStudio.Application.Common;
 using WebcamStudio.Application.TokenReports;
@@ -40,7 +40,6 @@ public class TokenReportsController : ApiControllerBase
         return Ok(ApiResponse<List<TokenReportDto>>.Ok(reports));
     }
 
-    /// <summary>Resumen agregado de todas las modelos: solo staff (ver GetMineSummary para el self-service).</summary>
     [Authorize(Roles = StaffRoles)]
     [HttpGet("summary")]
     public async Task<IActionResult> Summary(
@@ -51,7 +50,6 @@ public class TokenReportsController : ApiControllerBase
         return Ok(ApiResponse<List<TokenSummaryDto>>.Ok(summary));
     }
 
-    /// <summary>Mis propios reportes de tokens (cualquier rol autenticado, siempre acotado a si mismo).</summary>
     [HttpGet("me")]
     public async Task<IActionResult> GetMine(
         [FromQuery] Guid? siteId, [FromQuery] DateOnly? periodFrom, [FromQuery] DateOnly? periodTo, CancellationToken ct)
@@ -60,7 +58,6 @@ public class TokenReportsController : ApiControllerBase
         return Ok(ApiResponse<List<TokenReportDto>>.Ok(reports));
     }
 
-    /// <summary>Mi propio resumen agregado (cualquier rol autenticado, siempre acotado a si mismo).</summary>
     [HttpGet("me/summary")]
     public async Task<IActionResult> GetMineSummary(
         [FromQuery] Guid? siteId, [FromQuery] DateOnly? periodFrom, [FromQuery] DateOnly? periodTo, CancellationToken ct)

@@ -1,4 +1,4 @@
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -6,14 +6,6 @@ using WebcamStudio.Application.Interfaces.Services;
 
 namespace WebcamStudio.Infrastructure.ExternalServices;
 
-/// <summary>
-/// Envia mensajes de WhatsApp usando la API oficial de Meta (WhatsApp Cloud API), el
-/// proveedor estandar/gratuito para negocios -- no depende de contratar un tercero no
-/// oficial. Igual que SmtpEmailSender: nunca lanza excepcion hacia el llamador, si falta
-/// configurar PhoneNumberId/AccessToken o la llamada falla, solo se registra en el log.
-/// Cuando se tengan las credenciales reales, solo hay que completarlas en appsettings
-/// (seccion "WhatsApp") -- ningun otro archivo necesita cambiar.
-/// </summary>
 public class WhatsAppCloudApiNotifier : IWhatsAppNotifier
 {
     private readonly HttpClient _httpClient;
