@@ -4,12 +4,7 @@ using WebcamStudio.Application.Common;
 
 namespace WebcamStudio.Api.Middleware;
 
-/// <summary>
-/// Atrapa cualquier excepcion no manejada (bugs, timeouts de base de datos, etc. -- no
-/// las fallas de negocio esperadas, que los servicios ya devuelven como Result.Failure)
-/// y la convierte en una ApiResponse consistente, para que el frontend NUNCA reciba
-/// un HTML de error de IIS/Kestrel o un stack trace crudo.
-/// </summary>
+
 public class ExceptionHandlingMiddleware
 {
     private readonly RequestDelegate _next;

@@ -129,7 +129,7 @@ public class ModelAccountService : IModelAccountService
             return Result.Failure("Cuenta no encontrada.");
 
         account.PasswordHash = _passwordHasher.Hash(request.NewPassword);
-        // Una contraseña nueva no deberia quedar bloqueada por intentos fallidos previos.
+        
         account.FailedLoginAttempts = 0;
         account.LockedUntil = null;
 

@@ -7,7 +7,7 @@ using WebcamStudio.Domain.Enums;
 
 namespace WebcamStudio.Api.Controllers;
 
-/// <summary>Modulo "Checklist de habitaciones" (F) del diagrama.</summary>
+
 [Authorize]
 public class ChecklistsController : ApiControllerBase
 {

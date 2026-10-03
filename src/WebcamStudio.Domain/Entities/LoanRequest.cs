@@ -3,11 +3,6 @@ using WebcamStudio.Domain.Enums;
 
 namespace WebcamStudio.Domain.Entities;
 
-/// <summary>
-/// Solicitud de prestamo hecha por una modelo o un monitor. Al crearse dispara un
-/// correo al dueno del estudio (ver IEmailSender) y queda pendiente hasta que un Admin
-/// la apruebe o la rechace.
-/// </summary>
 public class LoanRequest : AuditableEntity
 {
     public Guid RequestedByAccountId { get; set; }

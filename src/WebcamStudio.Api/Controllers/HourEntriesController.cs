@@ -6,8 +6,7 @@ using WebcamStudio.Domain.Enums;
 
 namespace WebcamStudio.Api.Controllers;
 
-/// <summary>Modulo "Horas": el staff anota los movimientos de horas de cada modelo;
-/// cada cuenta consulta solo las suyas (ver GetMine).</summary>
+
 [Authorize]
 public class HourEntriesController : ApiControllerBase
 {
@@ -33,7 +32,7 @@ public class HourEntriesController : ApiControllerBase
         return Ok(ApiResponse<List<HourEntryDto>>.Ok(entries));
     }
 
-    /// <summary>Mis propias horas, solo lectura -- cualquier cuenta autenticada consulta las suyas.</summary>
+    
     [HttpGet("me")]
     public async Task<IActionResult> GetMine(CancellationToken ct)
     {

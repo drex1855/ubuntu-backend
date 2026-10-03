@@ -1,13 +1,6 @@
 namespace WebcamStudio.Application.Common;
 
-/// <summary>
-/// Sobre de respuesta estandar para TODOS los endpoints de la API.
-/// Corresponde al nodo "Generar respuesta para el frontend" (H) del diagrama:
-/// sin importar por cual de los 5 modulos entro la solicitud, el frontend siempre
-/// recibe la misma forma de respuesta, lo que simplifica muchisimo el consumo desde
-/// el cliente (un solo interceptor/parser para todo el sistema, sin importar cuantos
-/// modulos nuevos se agreguen despues).
-/// </summary>
+
 public class ApiResponse<T>
 {
     public bool Success { get; set; }

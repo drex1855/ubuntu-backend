@@ -6,10 +6,7 @@ using WebcamStudio.Domain.Enums;
 
 namespace WebcamStudio.Application.LoanRequests;
 
-/// <summary>
-/// Modulo "Prestamos": una modelo o monitor solicita un prestamo, el dueno recibe un
-/// correo de aviso, y un Admin aprueba o rechaza la solicitud desde el historial.
-/// </summary>
+
 public class LoanRequestService : ILoanRequestService
 {
     private readonly IUnitOfWork _unitOfWork;

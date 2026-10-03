@@ -5,9 +5,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- Unica dependencia externa de esta capa: solo las abstracciones de DI
-         (para poder exponer AddApplication() como composition root del modulo),
-         nada de EF Core, HTTP, etc. Eso se queda en Infrastructure/Api a proposito. -->
+    
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
   </ItemGroup>
 

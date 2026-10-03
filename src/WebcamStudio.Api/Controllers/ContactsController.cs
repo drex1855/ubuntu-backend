@@ -7,8 +7,7 @@ using WebcamStudio.Domain.Enums;
 
 namespace WebcamStudio.Api.Controllers;
 
-/// <summary>Base de datos de contactos: gente que escribio al WhatsApp del estudio,
-/// normalmente desde el formulario publico del sitio.</summary>
+
 [Authorize]
 public class ContactsController : ApiControllerBase
 {

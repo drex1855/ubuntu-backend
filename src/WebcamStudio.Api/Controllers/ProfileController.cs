@@ -6,11 +6,6 @@ using WebcamStudio.Domain.Enums;
 
 namespace WebcamStudio.Api.Controllers;
 
-/// <summary>
-/// Autoservicio: cualquier cuenta autenticada (Admin, Monitor o Modelo) consulta y edita
-/// su propio perfil aqui, sin depender de los permisos de ModelAccountsController (que
-/// exige Admin/Monitor porque administra las cuentas de OTRAS personas).
-/// </summary>
 [Authorize]
 public class ProfileController : ApiControllerBase
 {

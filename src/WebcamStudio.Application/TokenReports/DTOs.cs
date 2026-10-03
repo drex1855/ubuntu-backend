@@ -19,7 +19,7 @@ public record TokenReportDto(
     decimal MonetaryValue,
     DateTime RegisteredAt);
 
-/// <summary>Resumen agregado por modelo y sitio (nodo E6 del diagrama).</summary>
+
 public record TokenSummaryDto(
     Guid ModelAccountId,
     string ModelFullName,

@@ -5,12 +5,7 @@ using WebcamStudio.Domain.Entities;
 
 namespace WebcamStudio.Application.HourEntries;
 
-/// <summary>
-/// Modulo "Horas": el staff (Admin/Monitor) anota los movimientos de horas de una
-/// modelo (sumas y restas, con signo en Minutes); la modelo afectada solo puede
-/// consultar las suyas en su perfil, nunca cargarlas ni modificarlas (ver GetMineAsync).
-/// Reemplaza la calculadora anterior que vivia solo en el navegador y no persistia nada.
-/// </summary>
+
 public class HourEntryService : IHourEntryService
 {
     private readonly IUnitOfWork _unitOfWork;

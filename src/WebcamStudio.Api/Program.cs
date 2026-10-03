@@ -51,7 +51,7 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-// Composition roots de cada capa (ver DependencyInjection.cs de cada proyecto).
+
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 

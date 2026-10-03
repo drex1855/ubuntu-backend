@@ -11,7 +11,6 @@ public interface IModelAccountService
     Task<Result<ModelAccountDto>> SetStatusAsync(Guid id, UpdateAccountStatusRequest request, CancellationToken ct = default);
     Task<Result> ChangePasswordAsync(Guid id, ChangePasswordRequest request, CancellationToken ct = default);
 
-    /// <summary>Restablece la contraseña de cualquier cuenta -- solo para uso de Admin,
-    /// no valida contraseña actual (ver ChangePasswordAsync para el autoservicio).</summary>
+  
     Task<Result> ResetPasswordAsync(Guid id, ResetPasswordRequest request, CancellationToken ct = default);
 }

@@ -31,8 +31,7 @@ public class ModelAccountsController : ApiControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateModelAccountRequest request, CancellationToken ct)
     {
-        // Un Monitor no puede crear cuentas Admin ni Monitor (escalacion de privilegios):
-        // solo un Admin puede otorgar roles de staff. Monitor solo puede crear cuentas Modelo.
+        
         if (request.Role != AccountRole.Modelo && !User.IsInRole(nameof(AccountRole.Admin)))
             return Forbid();
 
@@ -49,8 +48,7 @@ public class ModelAccountsController : ApiControllerBase
     public async Task<IActionResult> SetStatus(Guid id, [FromBody] UpdateAccountStatusRequest request, CancellationToken ct) =>
         HandleResult(await _service.SetStatusAsync(id, request, ct));
 
-    /// <summary>Restablece la contraseña de cualquier cuenta. Solo Admin -- Monitor puede
-    /// administrar cuentas Modelo pero no manejar contraseñas de nadie.</summary>
+    
     [Authorize(Roles = nameof(AccountRole.Admin))]
     [HttpPost("{id:guid}/reset-password")]
     public async Task<IActionResult> ResetPassword(Guid id, [FromBody] ResetPasswordRequest request, CancellationToken ct) =>

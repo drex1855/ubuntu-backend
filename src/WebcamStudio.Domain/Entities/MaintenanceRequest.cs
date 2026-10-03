@@ -3,10 +3,7 @@ using WebcamStudio.Domain.Enums;
 
 namespace WebcamStudio.Domain.Entities;
 
-/// <summary>
-/// Solicitud de mantenimiento generada cuando un elemento del checklist queda
-/// marcado como "malo". Corresponde al nodo "Crear solicitud de mantenimiento" (F8).
-/// </summary>
+
 public class MaintenanceRequest : AuditableEntity
 {
     public Guid ChecklistRunId { get; set; }

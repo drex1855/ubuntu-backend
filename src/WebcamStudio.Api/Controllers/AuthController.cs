@@ -15,7 +15,7 @@ public class AuthController : ApiControllerBase
         _authService = authService;
     }
 
-    /// <summary>Autentica una cuenta (modelo o admin) y devuelve un JWT.</summary>
+    
     [EnableRateLimiting("Auth")]
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginRequest request, CancellationToken ct)
