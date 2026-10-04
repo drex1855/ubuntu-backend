@@ -25,7 +25,7 @@ public abstract class ApiControllerBase : ControllerBase
         return BadRequest(ApiResponse<object>.Fail(result.Error ?? "Solicitud invalida."));
     }
 
-    
+
     protected Guid CurrentAccountId =>
         Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var id)
             ? id
