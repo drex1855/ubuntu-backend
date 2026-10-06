@@ -1,5 +1,9 @@
 # Webcam Studio - Backend
 
+Copyright © 2026 drex1855.
+
+Este proyecto está licenciado bajo la licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+
 Backend en .NET 8 / ASP.NET Core Web API + MySQL para el sistema del estudio webcam
 (WhatsApp de modelos, inventario de tienda, reporte de tokens, checklist de habitaciones
 y cuentas de modelos). Ver **[docs/ARQUITECTURA.md](docs/ARQUITECTURA.md)** para la
